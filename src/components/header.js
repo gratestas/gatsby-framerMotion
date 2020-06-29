@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, { useEffect } from "react"
 import { Link } from 'gatsby'
 
 import { HeaderNav, Logo, Menu } from '../styles/headerStyles'
@@ -11,35 +11,37 @@ const Header = () => {
   const { currentTheme } = useGlobalStateContext();
 
   const toggleTheme = () => {
-    currentTheme === 'dark' 
-    ? dispatch({type: 'TOGGLE_THEME', theme: 'light'})
-    : dispatch({type: 'TOGGLE_THEME', theme: 'dark'})
+    currentTheme === 'dark'
+      ? dispatch({ type: 'TOGGLE_THEME', theme: 'light' })
+      : dispatch({ type: 'TOGGLE_THEME', theme: 'dark' })
   }
-  
+
   // useEffect hook is used for keeping theme set after page refresh
   useEffect(() => {
-   window.localStorage.setItem('theme', currentTheme)
+    window.localStorage.setItem('theme', currentTheme)
   }, [currentTheme])
 
   return (
-    <HeaderNav>
-      <Container >
-        {console.log(currentTheme)}
-        <Flex spaceBetween noHeight>
-          <Logo>
-            <Link to='/'>FURR</Link>
-              <span onClick={toggleTheme}></span>
-            <Link to='/'>W</Link>
-          </Logo>
-          <Menu>
-            <button>
-              <span></span>
-              <span></span>
-            </button>
-          </Menu>
-        </Flex>
-      </Container>
-    </HeaderNav>
+    <HeaderNav
+      animate={{y:0, opacity: 1}} initial={{y:-72, opacity: 0}} transition={{duration: 1, ease:[.6, .05, -.01, .9]}}
+    >
+  <Container >
+    {console.log(currentTheme)}
+    <Flex spaceBetween noHeight>
+      <Logo>
+        <Link to='/'>FURR</Link>
+        <span onClick={toggleTheme}></span>
+        <Link to='/'>W</Link>
+      </Logo>
+      <Menu>
+        <button>
+          <span></span>
+          <span></span>
+        </button>
+      </Menu>
+    </Flex>
+  </Container>
+    </HeaderNav >
   )
 }
 

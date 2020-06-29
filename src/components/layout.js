@@ -14,6 +14,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { normalize } from 'styled-normalize'
 
 import Header from './header'
+import Cursor from '../components/customCursor'
 
 import { useGlobalStateContext } from '../context/globalContext'
 
@@ -22,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     text-decoration: none;
+    cursor: none;
   }
 
   html {
@@ -63,11 +65,12 @@ const Layout = ({ children }) => {
     red: '#ea291e',
   }
 
-  const {currentTheme} = useGlobalStateContext();
+  const { currentTheme } = useGlobalStateContext();
 
   return (
     <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
       <GlobalStyle />
+      <Cursor />
       <Header />
       <main>{children}</main>
     </ThemeProvider>
