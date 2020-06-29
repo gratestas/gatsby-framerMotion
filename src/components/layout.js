@@ -9,8 +9,36 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
 import "./layout.css"
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { normalize } from 'styled-normalize'
+
+import Header from './header'
+
+import { useGlobalStateContext } from '../context/globalContext'
+
+export const GlobalStyle = createGlobalStyle`
+  ${normalize}
+
+  * {
+    text-decoration: none;
+  }
+
+  html {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiesed;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: ${props => props.theme.background};
+    overscroll-behavior: none;
+    overflow-x: hidden;
+  }
+`
+
+
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -23,26 +51,31 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const lightTheme = {
+    background: '#fff',
+    text: '#000',
+    red: '#ea291e',
+  }
+
+  const darkTheme = {
+    background: '#000',
+    text: '#fff',
+    red: '#ea291e',
+  }
+
+  const {currentTheme} = useGlobalStateContext();
+
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <Header />
+      <main>{children}</main>
+    </ThemeProvider>
   )
 }
+
+
+
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

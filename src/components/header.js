@@ -1,42 +1,46 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import React, {useEffect} from "react"
+import { Link } from 'gatsby'
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+import { HeaderNav, Logo, Menu } from '../styles/headerStyles'
+import { Container, Flex } from '../styles/globalStyles'
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+import { useGlobalStateContext, useGlobalDispatchContext } from '../context/globalContext'
+
+const Header = () => {
+  const dispatch = useGlobalDispatchContext();
+  const { currentTheme } = useGlobalStateContext();
+
+  const toggleTheme = () => {
+    currentTheme === 'dark' 
+    ? dispatch({type: 'TOGGLE_THEME', theme: 'light'})
+    : dispatch({type: 'TOGGLE_THEME', theme: 'dark'})
+  }
+  
+  // useEffect hook is used for keeping theme set after page refresh
+  useEffect(() => {
+   window.localStorage.setItem('theme', currentTheme)
+  }, [currentTheme])
+
+  return (
+    <HeaderNav>
+      <Container >
+        {console.log(currentTheme)}
+        <Flex spaceBetween noHeight>
+          <Logo>
+            <Link to='/'>FURR</Link>
+              <span onClick={toggleTheme}></span>
+            <Link to='/'>W</Link>
+          </Logo>
+          <Menu>
+            <button>
+              <span></span>
+              <span></span>
+            </button>
+          </Menu>
+        </Flex>
+      </Container>
+    </HeaderNav>
+  )
 }
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
+export default Header;
