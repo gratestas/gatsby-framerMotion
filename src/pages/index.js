@@ -2,11 +2,13 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import HomeBanner from "../components/homePage/HomeBanner"
+
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <p>Welcome to your new Gatsby site.</p>
+    <HomeBanner/>
   </Layout>
 )
 

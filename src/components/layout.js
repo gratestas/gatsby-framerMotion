@@ -70,6 +70,7 @@ const Layout = ({ children }) => {
 
   const onCursor = cursorType => {
     cursorType = (cursorStyles.includes(cursorType) && cursorType) || false
+    // updates global state
     dispatch({ type: 'CURSOR_TYPE', cursorType: cursorType })
   }
 
