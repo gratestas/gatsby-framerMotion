@@ -13,6 +13,13 @@ const globalReducer = (state, action) => {
 
             }
         }
+        case 'CURSOR_TYPE': {
+            return {
+                ...state,
+                cursorType: action.cursorType
+
+            }
+        }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
@@ -22,7 +29,9 @@ const globalReducer = (state, action) => {
 export const GlobalProvider = ({children}) => {
     const [state, dispatch] = useReducer(globalReducer, {
         // here the useEffect hook is used for keeping theme set after page refresh
-        currentTheme: window.localStorage.getItem('theme') == null ? 'dark' : window.localStorage.getItem('theme')
+        currentTheme: window.localStorage.getItem('theme') == null ? 'dark' : window.localStorage.getItem('theme'),
+        cursorType: false,
+        cursorStyles: ['pointer', 'hovered'],
     })
 
     return (
