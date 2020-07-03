@@ -66,5 +66,12 @@ export const Cursor = styled.div`
     will-change: width, height, transform, border;
     pointer-events: none;
     z-index: 999;
+
+    &.hovered {
+        background: transparent !important;
+        width: 60px;
+        height: 60px;
+        border: 2px solid ${props => props.theme.red};
+    }
 `
 
