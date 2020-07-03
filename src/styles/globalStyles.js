@@ -67,6 +67,9 @@ export const Cursor = styled.div`
     pointer-events: none;
     z-index: 999;
 
+    &.pointer {
+        border: 2px solid ${props => props.theme.text} !important;
+    }
     &.hovered {
         background: transparent !important;
         width: 60px;
