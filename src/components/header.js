@@ -6,7 +6,7 @@ import { Container, Flex } from '../styles/globalStyles'
 
 import { useGlobalStateContext, useGlobalDispatchContext } from '../context/globalContext'
 
-const Header = () => {
+const Header = ({ onCursor }) => {
   const dispatch = useGlobalDispatchContext();
   const { currentTheme } = useGlobalStateContext();
 
@@ -23,24 +23,27 @@ const Header = () => {
 
   return (
     <HeaderNav
-      animate={{y:0, opacity: 1}} initial={{y:-72, opacity: 0}} transition={{duration: 1, ease:[.6, .05, -.01, .9]}}
+      animate={{ y: 0, opacity: 1 }} initial={{ y: -72, opacity: 0 }} transition={{ duration: 1, ease: [.6, .05, -.01, .9] }}
     >
-  <Container >
-    {console.log(currentTheme)}
-    <Flex spaceBetween noHeight>
-      <Logo>
-        <Link to='/'>FURR</Link>
-        <span onClick={toggleTheme}></span>
-        <Link to='/'>W</Link>
-      </Logo>
-      <Menu>
-        <button>
-          <span></span>
-          <span></span>
-        </button>
-      </Menu>
-    </Flex>
-  </Container>
+      <Container >
+        {console.log(currentTheme)}
+        <Flex spaceBetween noHeight>
+          <Logo
+            onMouseEnter={() => onCursor('hovered')}
+            onMouseLeave={onCursor}
+          >
+            <Link to='/'>FURR</Link>
+            <span onClick={toggleTheme}></span>
+            <Link to='/'>W</Link>
+          </Logo>
+          <Menu>
+            <button>
+              <span></span>
+              <span></span>
+            </button>
+          </Menu>
+        </Flex>
+      </Container>
     </HeaderNav >
   )
 }
