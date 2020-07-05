@@ -5,7 +5,7 @@ import { Banner, Video, BannerTitle, Canvas, Headline } from '../../styles/homeS
 import useWindowSize from '../../hooks/useWindowSIze'
 import { useGlobalStateContext } from '../../context/globalContext'
 
-const HomeBanner = () => {
+const HomeBanner = ({ onCursor }) => {
     let canvas = useRef(null);
     const size = useWindowSize();
     const { currentTheme } = useGlobalStateContext();
@@ -58,6 +58,27 @@ const HomeBanner = () => {
         })
     }, [currentTheme])
 
+    let parent = {
+        initial: { y: 800 },
+        animate: {
+            y: 0,
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    }
+
+    let child = {
+        initial: { y: 800 },
+        animate: {
+            y: 0,
+            transition: {
+                duration: 1,
+                ease: [.6, .05, -.01, .9]
+            },
+        },
+    }
+
     return (
         <Banner>
             <Video>
@@ -71,10 +92,10 @@ const HomeBanner = () => {
                     muted
                 />
             </Video>
-            <Canvas height={size.height} width={size.width} ref={canvas} />
-            <BannerTitle>
-                <Headline>DIG</Headline>
-                <Headline>DEEP</Headline>
+            <Canvas height={size.height} width={size.width} ref={canvas} onMouseEnter={() => onCursor('hovered')} onMouseLeave={onCursor} />
+            <BannerTitle variants={parent} initial='initial' animate='animate'>
+                <Headline variants={child}>DIG</Headline>
+                <Headline variants={child}>DEEP</Headline>
             </BannerTitle>
         </Banner>
     )
