@@ -1,3 +1,7 @@
+credits:
+https://github.com/wrongakram/ar-episode2
+https://www.youtube.com/watch?v=WRkmpqTluI8
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">
