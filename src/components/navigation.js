@@ -13,7 +13,7 @@ const navRoutes = [
     { id: 4, title: '50 beaches', path: '/50-beaches', video: '50-beaches.mp4' },
 ]
 
-const Navigation = ({ toggleMenu, setToggleMenu }) => {
+const Navigation = ({ toggleMenu, setToggleMenu, onCursor }) => {
     const [revealVideo, setRevealVideo] = useState({
         show: false,
         video: 'featured-video.mp4',
@@ -23,17 +23,21 @@ const Navigation = ({ toggleMenu, setToggleMenu }) => {
         <React.Fragment>
             <AnimatePresence>
                 {toggleMenu && (
-                    <Nav 
-                        initial={{x: '-100%'}}
-                        exit={{x: '-100%'}}
-                        animate={{x: toggleMenu ? 0 : '-100%'}}
-                        transition= {{duration: .8, ease: [.6,.05, -.01, .9]}}
+                    <Nav
+                        initial={{ x: '-100%' }}
+                        exit={{ x: '-100%' }}
+                        animate={{ x: toggleMenu ? 0 : '-100%' }}
+                        transition={{ duration: .8, ease: [.6, .05, -.01, .9] }}
                     >
                         <Container>
                             <NavHeader>
                                 <Flex spaceBetween noHeight>
                                     <h2>Projects</h2>
-                                    <CloseNav onClick={() => setToggleMenu(!toggleMenu)}>
+                                    <CloseNav
+                                        onClick={() => setToggleMenu(!toggleMenu)}
+                                        onMouseEnter={() => onCursor('pointer')}
+                                        onMouseLeave={onCursor}
+                                    >
                                         <button>
                                             <span></span>
                                             <span></span>
@@ -62,7 +66,11 @@ const Navigation = ({ toggleMenu, setToggleMenu }) => {
                                                 })
                                             }
                                         >
-                                            <Link to={`/projects/${route.path}`}>
+                                            <Link
+                                                to={`/projects/${route.path}`}
+                                                onMouseEnter={() => onCursor('pointer')}
+                                                onMouseLeave={onCursor}
+                                            >
                                                 <motion.div
                                                     initial={{ x: -80 }}
                                                     whileHover={{

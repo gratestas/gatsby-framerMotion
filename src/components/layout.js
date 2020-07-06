@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, {useState} from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 
 import "./layout.css"
@@ -71,7 +71,7 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
       <GlobalStyle />
-      <Cursor toggleMenu={toggleMenu } />
+      <Cursor toggleMenu={toggleMenu} />
       <Header
         onCursor={onCursor}
         toggleMenu={toggleMenu}
@@ -79,7 +79,8 @@ const Layout = ({ children }) => {
       />
       <Navigation
         toggleMenu={toggleMenu}
-        setToggleMenu={setToggleMenu} 
+        setToggleMenu={setToggleMenu}
+        onCursor={onCursor}
       />
       <main>{children}</main>
     </ThemeProvider>
