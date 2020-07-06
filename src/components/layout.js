@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, {useState} from "react"
 import PropTypes from "prop-types"
 
 import "./layout.css"
@@ -14,6 +14,7 @@ import { normalize } from 'styled-normalize'
 
 import Header from './header'
 import Cursor from '../components/customCursor'
+import Navigation from './navigation'
 
 import { useGlobalStateContext, useGlobalDispatchContext } from '../context/globalContext'
 
@@ -32,7 +33,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Helvetica,  Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: ${props => props.theme.background};
     overscroll-behavior: none;
     overflow-x: hidden;
@@ -42,7 +43,7 @@ export const GlobalStyle = createGlobalStyle`
 
 
 const Layout = ({ children }) => {
- 
+
 
   const lightTheme = {
     background: '#fff',
@@ -65,11 +66,21 @@ const Layout = ({ children }) => {
     dispatch({ type: 'CURSOR_TYPE', cursorType: cursorType })
   }
 
+  const [toggleMenu, setToggleMenu] = useState(false)
+
   return (
     <ThemeProvider theme={currentTheme === 'dark' ? darkTheme : lightTheme}>
       <GlobalStyle />
       <Cursor />
-      <Header onCursor={onCursor} />
+      <Header
+        onCursor={onCursor}
+        toggleMenu={toggleMenu}
+        setToggleMenu={setToggleMenu}
+      />
+      <Navigation
+        toggleMenu={toggleMenu}
+        setToggleMenu={setToggleMenu} 
+      />
       <main>{children}</main>
     </ThemeProvider>
   )

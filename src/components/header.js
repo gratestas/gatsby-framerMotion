@@ -6,7 +6,7 @@ import { Container, Flex } from '../styles/globalStyles'
 
 import { useGlobalStateContext, useGlobalDispatchContext } from '../context/globalContext'
 
-const Header = ({ onCursor }) => {
+const Header = ({ onCursor, setToggleMenu, toggleMenu  }) => {
   const dispatch = useGlobalDispatchContext();
   const { currentTheme } = useGlobalStateContext();
 
@@ -40,7 +40,7 @@ const Header = ({ onCursor }) => {
             ></span>
             <Link to='/'>W</Link>
           </Logo>
-          <Menu>
+          <Menu onClick={() => setToggleMenu(!toggleMenu)}>
             <button>
               <span></span>
               <span></span>
