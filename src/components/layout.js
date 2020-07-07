@@ -37,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
     background: ${props => props.theme.background};
     overscroll-behavior: none;
     overflow-x: hidden;
+    overflow: visible;
   }
 `
 
