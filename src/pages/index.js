@@ -3,8 +3,10 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import HomeBanner from "../components/homePage/HomeBanner"
-import { useGlobalStateContext, useGlobalDispatchContext } from '../context/globalContext'
+import HomeContent from "../components/homePage/HomeContent"
 
+import { useGlobalStateContext, useGlobalDispatchContext } from '../context/globalContext'
+import HomeFeatured from "../components/homePage/HomeFeatured"
 
 const IndexPage = props => {
 
@@ -21,6 +23,8 @@ const IndexPage = props => {
     <Layout>
       <SEO title="Home" />
       <HomeBanner onCursor={onCursor}/>
+      <HomeContent/>
+      <HomeFeatured/>
     </Layout>
   )
 }
