@@ -24,7 +24,7 @@ const IndexPage = props => {
       <SEO title="Home" />
       <HomeBanner onCursor={onCursor}/>
       <HomeContent/>
-      <HomeFeatured/>
+      <HomeFeatured  onCursor={onCursor}/>
     </Layout>
   )
 }
