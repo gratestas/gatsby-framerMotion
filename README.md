@@ -1,6 +1,5 @@
 <h3>credits:</h3>
-<p>https://github.com/wrongakram/ar-episode2</p>
-<p>https://www.youtube.com/watch?v=WRkmpqTluI8</p>
+<p>https://github.com/wrongakram/ar-episode2 <br>https://www.youtube.com/watch?v=WRkmpqTluI8</p>
 
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
