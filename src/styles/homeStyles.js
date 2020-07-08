@@ -178,7 +178,7 @@ export const Services = styled.div`
 `
 
 //Accordion
-export const AccordionHeader = styled.div`
+export const AccordionHeader = styled(motion.div)`
     width: 100%;
     height: 32px;
     display: flex;
