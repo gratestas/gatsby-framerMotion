@@ -1,15 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Container, Flex } from '../../styles/globalStyles'
 import { HomeAboutSection, About, Services, AccordionHeader, AccordionIcon, AccordionContent } from '../../styles/homeStyles'
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
 
 import data from './services.data'
 import { useGlobalStateContext } from '../../context/globalContext'
 
 const HomeAbout = ({ onCursor }) => {
+    const animation = useAnimation();
+    const [aboutRef, inView] = useInView({
+        triggerOnce: true,
+        rootMargin: '-300px' // requires 300px of scroll untill we reach the element
+    });
     const [expanded, setExpended] = useState(0)
+
+    useEffect(() => {
+        if (inView) {
+            animation.start('visible')
+        }
+    }, [animation, inView])
     return (
-        <HomeAboutSection>
+        <HomeAboutSection
+            ref={aboutRef}
+            animate={animation}
+            initial='hidden'
+            variants={{
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.7, ease: [0.6, 0.05, -0.01, 0.9] },
+                },
+                hidden: {
+                    opacity: 0,
+                    y: 100,
+                },
+            }}
+        >
             <Container>
                 <Flex alignTop>
                     <About>
@@ -45,7 +72,7 @@ const HomeAbout = ({ onCursor }) => {
 const Accordion = ({ details, expanded, setExpended, onCursor }) => {
     const isOpen = details.id === expanded;
     const [hovered, setHovered] = useState(false);
-    const {currentTheme} = useGlobalStateContext();  
+    const { currentTheme } = useGlobalStateContext();
     return (
         <React.Fragment>
             <AccordionHeader
