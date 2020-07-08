@@ -38,7 +38,7 @@ ${props => props.spaceBetween &&
 
 ${props => props.alignTop &&
     css`
-    justify-content: flex-start;
+    align-items: flex-start;
 `}
 
 ${props => props.flexEnd &&
