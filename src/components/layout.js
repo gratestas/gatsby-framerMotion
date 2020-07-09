@@ -17,6 +17,7 @@ import Cursor from '../components/customCursor'
 import Navigation from './navigation'
 
 import { useGlobalStateContext, useGlobalDispatchContext } from '../context/globalContext'
+import Footer from "./footer"
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -94,6 +95,7 @@ const Layout = ({ children }) => {
         onCursor={onCursor}
       />
       <main>{children}</main>
+      <Footer onCursor={onCursor}/>
     </ThemeProvider>
   )
 }
