@@ -1,19 +1,27 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import { Link } from 'gatsby'
 
 import { HeaderNav, Logo, Menu } from '../styles/headerStyles'
 import { Container, Flex } from '../styles/globalStyles'
 
 import { useGlobalStateContext, useGlobalDispatchContext } from '../context/globalContext'
+import useElementPosition from '../hooks/useElementPosition'
 
-const Header = ({ onCursor, setToggleMenu, toggleMenu  }) => {
+const Header = ({ onCursor, setToggleMenu, toggleMenu, habmurgerPosition, setHamburgerPosition }) => {
   const dispatch = useGlobalDispatchContext();
   const { currentTheme } = useGlobalStateContext();
+  const hamburger = useRef(null);
+  const position = useElementPosition(hamburger);
 
   const toggleTheme = () => {
     currentTheme === 'dark'
       ? dispatch({ type: 'TOGGLE_THEME', theme: 'light' })
       : dispatch({ type: 'TOGGLE_THEME', theme: 'dark' })
+  }
+
+  const menuHover = () => {
+    onCursor('locked');
+    setHamburgerPosition({ x: position.x, y: position.y + 72 })
   }
 
   // useEffect hook is used for keeping theme set after page refresh
@@ -40,7 +48,7 @@ const Header = ({ onCursor, setToggleMenu, toggleMenu  }) => {
             ></span>
             <Link to='/'>W</Link>
           </Logo>
-          <Menu onClick={() => setToggleMenu(!toggleMenu)}>
+          <Menu ref={hamburger} onClick={() => setToggleMenu(!toggleMenu)} onMouseEnter={menuHover} onMouseLeave={onCursor}>
             <button>
               <span></span>
               <span></span>

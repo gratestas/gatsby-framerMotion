@@ -31,7 +31,7 @@ export const GlobalProvider = ({children}) => {
         // here the useEffect hook is used for keeping theme set after page refresh
         currentTheme: window.localStorage.getItem('theme') == null ? 'dark' : window.localStorage.getItem('theme'),
         cursorType: false,
-        cursorStyles: ['pointer', 'hovered'],
+        cursorStyles: ['pointer', 'hovered', 'locked'],
     })
 
     return (

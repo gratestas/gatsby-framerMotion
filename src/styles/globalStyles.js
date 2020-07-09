@@ -79,5 +79,15 @@ export const Cursor = styled.div`
     &.nav-open {
         background: ${props => props.theme.text};
     }
+
+    &.locked {
+        background: transparent !important;
+        width: 60px;
+        height: 60px;
+        border: 2px solid ${props => props.theme.red};
+        top: ${props => props.theme.top} !important;
+        left: ${props => props.theme.left} !important;
+    }
+     
 `
 
